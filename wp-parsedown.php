@@ -37,6 +37,7 @@ class WP_Parsedown
   // Runs on init; adds our content filter.
   public function init()
   {
+    remove_filter( 'the_content', 'wpautop' );
     add_filter( 'the_content', [ &$this, 'parse' ], 1 );
   }
 
