@@ -32,6 +32,9 @@ class WP_Parsedown
     $this->parser = Parsedown::instance();
 
     add_action( 'init', [ &$this, 'init' ] );
+
+    // Disable the visual editor globally when this plugin is active.
+    add_filter( 'user_can_richedit', '__return_false' );
   }
 
   // Runs on init; adds our content filter.
