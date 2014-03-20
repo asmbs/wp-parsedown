@@ -53,7 +53,7 @@ class WP_Parsedown
   }
 
   // Runs on admin_enqueue_scripts; enqueues JS on editor pages.
-  public function maybe_enqueue_script( $hook )
+  public function maybe_enqueue_scripts( $hook )
   {
     if ( $hook == 'post.php' )
       wp_enqueue_script( 'preview_js', $this->uri .'assets/js/dist/scripts.min.js', [ 'jquery' ], null, true );
