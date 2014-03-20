@@ -1,0 +1,14 @@
+{
+  "name": "wp-parsedown",
+  "version": "0.3.0",
+  "author": "Kyle Tucker <kyleatucker@gmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-uglify": "~0.2.4"
+  }
+}
