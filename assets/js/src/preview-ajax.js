@@ -11,6 +11,9 @@
       var $this = $(this);
       var $content = $('#content');
 
+      $this.css({
+        opacity: '0.5'
+      });
       $.ajax({
         url: ajaxurl,
         type: 'POST',
@@ -20,6 +23,7 @@
           content: $content.val()
         },
         success: function(d){
+          $this.removeAttr('style');
           $this.html(d);
         },
         error: function(e){
