@@ -34,11 +34,12 @@ class WP_Parsedown
     // Init
     add_action( 'init', [ &$this, 'init' ] );
 
-    // Add preview meta box, enqueue the AJAX script for it, and add the AJAX action
+    // Add preview meta box and add the AJAX action for updating it
     add_action( 'add_meta_boxes', [ &$this, 'add_preview_meta_box' ], 10, 2 );
-    add_action( 'admin_enqueue_scripts', [ &$this, 'maybe_enqueue_preview_script' ] );
     add_action( 'wp_ajax_update_preview', [ &$this, 'ajax_update_preview_meta_box' ] );
 
+    // Enqueue plugin scripts (for editing view only)
+    add_action( 'admin_enqueue_scripts', [ &$this, 'maybe_enqueue_scripts' ] );
 
     // Disable the visual editor globally when this plugin is active.
     add_filter( 'user_can_richedit', '__return_false' );
@@ -51,11 +52,11 @@ class WP_Parsedown
     add_filter( 'the_content', [ &$this, 'parse' ], 1 );
   }
 
-  // Runs on admin_enqueue_scripts; enqueues Markdown preview JS on editor pages.
-  public function maybe_enqueue_preview_script( $hook )
+  // Runs on admin_enqueue_scripts; enqueues JS on editor pages.
+  public function maybe_enqueue_script( $hook )
   {
     if ( $hook == 'post.php' )
-      wp_enqueue_script( 'preview_js', $this->uri .'assets/js/src/preview-ajax.js', [ 'jquery' ], false, true );
+      wp_enqueue_script( 'preview_js', $this->uri .'assets/js/dist/scripts.min.js', [ 'jquery' ], null, true );
   }
 
   // Runs on add_meta_boxes; adds Markdown Preview meta box
