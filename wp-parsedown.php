@@ -1,11 +1,11 @@
 <?php
-// -- wp-parsedown | v0.3.0 | MIT License | @friartuck6000
+// -- wp-parsedown | v0.3.1 | MIT License | @friartuck6000
 // ---------------------------------------------------------------------
 
 // Plugin Name:  WP Parsedown
 // Plugin URI:   https://github.com/friartuck6000/wp-parsedown
 // Description:  A wrapper for Parsedown that lets you use Markdown in WordPress.
-// Version:      0.3.0
+// Version:      0.3.1
 // Author:       Kyle Tucker
 // Author URI:   https://github.com/friartuck6000
 
@@ -55,7 +55,7 @@ class WP_Parsedown
   // Runs on admin_enqueue_scripts; enqueues JS on editor pages.
   public function maybe_enqueue_scripts( $hook )
   {
-    if ( $hook == 'post.php' )
+    if ( $hook == 'post.php' || $hook == 'post-new.php' )
       wp_enqueue_script( 'preview_js', $this->uri .'assets/js/dist/scripts.min.js', [ 'jquery' ], null, true );
   }
 

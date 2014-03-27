@@ -1,6 +1,6 @@
 {
   "name": "wp-parsedown",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "author": "Kyle Tucker <kyleatucker@gmail.com>",
   "license": "MIT",
   "engines": {
