@@ -88,7 +88,6 @@ class WP_Parsedown
   // Remove all the quicktags!
   public function drop_quicktags( $quicktags )
   {
-    error_log( print_r( $quicktags, true ) );
     $quicktags['buttons'] = 'fullscreen';
 
     return $quicktags;
