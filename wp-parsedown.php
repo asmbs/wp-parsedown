@@ -103,7 +103,7 @@ class WP_Parsedown
   public function ajax_update_preview_meta_box()
   {
     $content = $_POST['content'];
-    echo stripslashes( $this->parse( $content ) );
+    echo apply_filters( 'the_content', stripslashes( $content ) );
     die();
   }
 
