@@ -1,11 +1,11 @@
 <?php
-// -- wp-parsedown | v0.3.3 | MIT License | @friartuck6000
+// -- wp-parsedown | v0.4.0 | MIT License | @friartuck6000
 // ---------------------------------------------------------------------
 
 // Plugin Name:  WP Parsedown
 // Plugin URI:   https://github.com/friartuck6000/wp-parsedown
 // Description:  A wrapper for Parsedown that lets you use Markdown in WordPress.
-// Version:      0.3.3
+// Version:      0.4.0
 // Author:       Kyle Tucker
 // Author URI:   https://github.com/friartuck6000
 
@@ -103,7 +103,7 @@ class WP_Parsedown
   public function ajax_update_preview_meta_box()
   {
     $content = $_POST['content'];
-    echo stripslashes( $this->parse( $content ) );
+    echo apply_filters( 'the_content', stripslashes( $content ) );
     die();
   }
 
