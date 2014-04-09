@@ -41,6 +41,9 @@ class WP_Parsedown
     // Enqueue plugin scripts (for editing view only)
     add_action( 'admin_enqueue_scripts', [ &$this, 'maybe_enqueue_scripts' ] );
 
+    // Add Markdown Cheatsheet help tab
+    add_action( 'admin_head', [ $this, 'add_help_tab' ] );
+
     // Disable the visual editor globally when this plugin is active.
     add_filter( 'user_can_richedit', '__return_false' );
 
@@ -84,6 +87,33 @@ class WP_Parsedown
     );
 
   }
+
+  // Add help tab
+  public function add_help_tab()
+  {
+    $screen = get_current_screen();
+    if ( $screen->base == 'post' )
+    {
+      $content = sprintf(
+        '<h3>%1$s</h3>'
+        .'<p>%2$s</p>',
+        __( 'What is Markdown?' ),
+        sprintf(
+          '<a href="%2$s" target="_blank">%1$s</a> %3$s',
+          __( 'Markdown' ),
+          'http://daringfireball.net/projects/markdown/',
+          __( 'is a special formatting syntax that allows you to write content in plain text.' )
+        )
+      );
+      $args = [
+        'id'      => 'markdown_help',
+        'title'   => _x( 'Markdown', 'help tab' ),
+        'content' => $content
+      ];
+      $screen->add_help_tab( $args );
+    }
+  }
+
 
   // Remove all the quicktags!
   public function drop_quicktags( $quicktags )
