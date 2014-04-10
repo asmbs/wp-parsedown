@@ -66,7 +66,10 @@ class WP_Parsedown
   public function maybe_enqueue_scripts( $hook )
   {
     if ( $hook == 'post.php' || $hook == 'post-new.php' )
+    {
       wp_enqueue_script( 'preview_js', $this->uri .'assets/js/dist/scripts.min.js', [ 'jquery' ], null, true );
+      wp_enqueue_style( 'markdown_admin_css', $this->uri .'assets/css/admin.min.css', [], null );
+    }
   }
 
   // Runs on add_meta_boxes; adds Markdown Preview meta box
