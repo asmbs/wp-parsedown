@@ -120,8 +120,6 @@ class WP_Parsedown
 
   public function image_send_to_editor( $html, $id, $caption, $title, $align, $url, $size, $alt )
   {
-    error_log( "\n ID:      $id \n Caption: $caption \n Title:   $title \n Align:   $align \n URL:     $url \n Size:    $size \n Alt:     $alt \n" );
-
     // Set optional items only if necessary
     $options = '';
     if ( !empty( $url ) )
