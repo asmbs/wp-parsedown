@@ -1,0 +1,36 @@
+
+// ---------------------------------------------------------------------------------------------
+// Cheatsheet table
+// ---------------------------------------------------------------------------------------------
+
+table#markdown-cheatsheet {
+  width: 100%;
+
+  th {
+    padding: 3px 9px;
+    text-align: left;
+  }
+  td {
+    padding: 15px 9px;
+
+    &.example-title {
+      padding: 15px 9px 6px;
+      border-bottom: 1px solid fade(#606060, 15%);
+
+      > h4 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: normal;
+      }
+    }
+
+    pre {
+      background: fade(#606060, 6%);
+      border: 1px solid fade(#606060,12%);
+      margin: 0;
+      padding: 12px;
+      font-size: 12px;
+      line-height: 125%;
+    }
+  }
+}
