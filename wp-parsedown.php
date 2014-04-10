@@ -132,24 +132,24 @@ class WP_Parsedown
               .'<td class="example-title" colspan="2"><h4>%1$s</h4></td>'
             .'</tr>'
             .'<tr>'
+              .'<th>%4$s</th>'
+              .'<th>%5$s</th>'
+            .'</tr>'
+            .'<tr>'
               .'<td><pre>%2$s</pre></td>'
               .'<td>%3$s</td>'
             .'</tr>',
             $sample['title'],
             $sample['before'],
-            $sample['after']
+            $sample['after'],
+            __( 'What you type' ),
+            __( 'How it\'s rendered' )
           );
         }
         $table = sprintf(
           '<table id="markdown-cheatsheet">'
-            .'<tr>'
-              .'<th>%1$s</th>'
-              .'<th>%2$s</th>'
-            .'</tr>'
-            .'%3$s'
+            .'%s'
           .'</table>',
-          __( 'What you type' ),
-          __( 'How it renders' ),
           $rows
         );
       }
