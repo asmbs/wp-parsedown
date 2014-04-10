@@ -47,6 +47,9 @@ class WP_Parsedown
     // Disable the visual editor globally when this plugin is active.
     add_filter( 'user_can_richedit', '__return_false' );
 
+    // Alter the code inserted when adding media to a post
+    add_filter( 'image_send_to_editor', [ $this, 'image_send_to_editor' ], 100, 8 );
+
     // Remove all but the fullscreen button from editor quicktags
     add_filter( 'quicktags_settings', [ $this, 'drop_quicktags'] );
   }
@@ -112,6 +115,45 @@ class WP_Parsedown
       ];
       $screen->add_help_tab( $args );
     }
+  }
+
+  public function image_send_to_editor( $html, $id, $caption, $title, $align, $url, $size, $alt )
+  {
+    error_log( "\n ID:      $id \n Caption: $caption \n Title:   $title \n Align:   $align \n URL:     $url \n Size:    $size \n Alt:     $alt \n" );
+
+    // Set optional items only if necessary
+    $options = '';
+    if ( !empty( $url ) )
+      $options .= sprintf(
+        ' url="%s"',
+        $url
+      );
+    if ( !empty( $caption ) )
+      $options .= sprintf(
+        ' caption="%s"',
+        $caption
+      );
+    if ( !empty( $alt ) )
+      $options .= sprintf(
+        ' alt="%s"',
+        $alt
+      );
+    if ( !empty( $title ) )
+      $options .= sprintf(
+        ' title="%s"',
+        $title
+      );
+
+    // Generate shortcode
+    $code = sprintf(
+      '[image id="%1$s" align="%2$s" size="%3$s"%4$s /]',
+      $id,
+      $align,
+      $size,
+      $options
+    );
+
+    return $code;
   }
 
 
