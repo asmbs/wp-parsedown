@@ -98,21 +98,64 @@ class WP_Parsedown
     $screen = get_current_screen();
     if ( $screen->base == 'post' )
     {
+      // Intro
       $content = sprintf(
         '<h3>%1$s</h3>'
         .'<p>%2$s</p>',
-        __( 'What is Markdown?' ),
+        __( 'Markdown Cheatsheet' ),
         sprintf(
-          '<a href="%2$s" target="_blank">%1$s</a> %3$s',
-          __( 'Markdown' ),
-          'http://daringfireball.net/projects/markdown/',
-          __( 'is a special formatting syntax that allows you to write content in plain text.' )
+          __( 'Use the quick reference below for tips on authoring content in Markdown. See %s to learn more.' ),
+          '<a href="http://daringfireball.net/projects/markdown/syntax">the official Markdown website</a>'
         )
       );
+
+      // Table
+      $samples = [
+        [
+          'title'  => __( 'Paragraphs' ),
+          'before' => 'The quick brown fox jumped over the lazy dog.'."\n\n".'Lorem ipsum dolor sit amet...',
+          'after'  => '<p>The quick brown fox jumped over the lazy dog.</p><p>Lorem ipsum dolor sit amet...</p>'
+        ]
+      ];
+
+      $table = '';
+      if ( !empty( $samples ) )
+      {
+        $rows = '';
+        foreach ( $samples as $sample )
+        {
+          $rows .= sprintf(
+            '<tr>'
+              .'<td class="example-title" colspan="2"><h4>%1$s</h4></td>'
+            .'</tr>'
+            .'<tr>'
+              .'<td><pre>%2$s</pre></td>'
+              .'<td>%3$s</td>'
+            .'</tr>',
+            $sample['title'],
+            $sample['before'],
+            $sample['after']
+          );
+        }
+        $table = sprintf(
+          '<table id="markdown-cheatsheet">'
+            .'<tr>'
+              .'<th>%1$s</th>'
+              .'<th>%2$s</th>'
+            .'</tr>'
+            .'%3$s'
+          .'</table>',
+          __( 'What you type' ),
+          __( 'How it renders' ),
+          $rows
+        );
+      }
+
+      // Set arguments and add tab
       $args = [
         'id'      => 'markdown_help',
         'title'   => _x( 'Markdown', 'help tab' ),
-        'content' => $content
+        'content' => $content . $table
       ];
       $screen->add_help_tab( $args );
     }
