@@ -108,7 +108,7 @@ class WP_Parsedown
         __( 'Markdown Cheatsheet' ),
         sprintf(
           __( 'Use the quick reference below for tips on authoring content in Markdown. See %s to learn more.' ),
-          '<a href="http://daringfireball.net/projects/markdown/syntax">the official Markdown website</a>'
+          '<a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">the official Markdown website</a>'
         )
       );
 
@@ -118,6 +118,29 @@ class WP_Parsedown
           'title'  => __( 'Paragraphs' ),
           'before' => 'The quick brown fox jumped over the lazy dog.'."\n\n".'Lorem ipsum dolor sit amet...',
           'after'  => '<p>The quick brown fox jumped over the lazy dog.</p><p>Lorem ipsum dolor sit amet...</p>'
+        ],
+        [
+          'title'  => __( 'Bold & Italics' ),
+          'before' => 'The _quick brown fox_ jumped over the **lazy dog**.',
+          'after'  => 'The <em>quick brown fox</em> jumped over the <strong>lazy dog</strong>.'
+        ],
+        [
+          'title'  => __( 'Lists' ),
+          'before' => "-  This is\n-  A _bulleted_\n-  List \n\n1. This is\n2. A _numbered_\n3. List",
+          'after'  => '<ul><li>This is</li><li>A <em>bulleted</em></li><li>List</li></ul>'
+                        .'<ol><li>This is</li><li>A <em>numbered</em></li><li>List</li></ol>'
+        ],
+        [
+          'title'  => __( 'Headings' ),
+          'before' => "## Second-Level Heading\n\n### Third-Level Heading\n\n_First-level headings are "
+                        ."reserved for the page title; please don't use them._",
+          'after'  => '<h2>Second-Level Heading</h2><h3>Third-Level Heading</h3><p><em>First-level headings '
+                        .'are reserved for the page title; please don\'t use them.</em></p>'
+        ],
+        [
+          'title'  => __( 'Hyperlinks' ),
+          'before' => '[Google](http://google.com) is the greatest search engine on the planet.',
+          'after'  => '<a href="http://google.com">Google</a> is the greatest search engine on the planet.'
         ]
       ];
 
@@ -132,18 +155,12 @@ class WP_Parsedown
               .'<td class="example-title" colspan="2"><h4>%1$s</h4></td>'
             .'</tr>'
             .'<tr>'
-              .'<th>%4$s</th>'
-              .'<th>%5$s</th>'
-            .'</tr>'
-            .'<tr>'
-              .'<td><pre>%2$s</pre></td>'
-              .'<td>%3$s</td>'
+              .'<td class="before"><pre>%2$s</pre></td>'
+              .'<td class="after">%3$s</td>'
             .'</tr>',
             $sample['title'],
             $sample['before'],
-            $sample['after'],
-            __( 'What you type' ),
-            __( 'How it\'s rendered' )
+            $sample['after']
           );
         }
         $table = sprintf(
