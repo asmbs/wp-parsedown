@@ -49,6 +49,7 @@ class WP_Parsedown
 
     // Alter the code inserted when adding media to a post
     add_filter( 'image_send_to_editor', [ $this, 'image_send_to_editor' ], 100, 8 );
+    add_shortcode( 'image', [ $this, 'shortcode_image' ] );
 
     // Remove all but the fullscreen button from editor quicktags
     add_filter( 'quicktags_settings', [ $this, 'drop_quicktags'] );
@@ -154,6 +155,47 @@ class WP_Parsedown
     );
 
     return $code;
+  }
+
+  public function shortcode_image( $attrs, $content = '' )
+  {
+    $src = wp_get_attachment_url( $attrs['id'] );
+
+    // Set the HTML for the image itself
+    $image_html = sprintf(
+      '<img id="image-%1$s" src="%2$s" alt="%3$s" />',
+      $attrs['id'],
+      $src,
+      $attrs['alt']
+    );
+
+    // Wrap the image HTML in an anchor if URL was given
+    if ( !empty( $attrs['url'] ) )
+      $image_html = sprintf( '<a href="%s">', $attrs['url'] ) . $image_html . '</a>';
+
+    // Add a caption element if a caption was set.
+    $caption_html = '';
+    if ( !empty( $attrs['caption'] ) )
+      $caption_html = sprintf(
+        '<figcaption>%s</figcaption>',
+        $attrs['caption']
+      );
+
+    // Set up the whole HTML figure element
+    $html = sprintf(
+      '<figure id="figure-%1$s" class="image %3$s %4$s">'
+        .'%2$s'
+        .'%5$s'
+      .'</figure>',
+      $attrs['id'],
+      $image_html,
+      $attrs['align'],
+      $attrs['size'],
+      $caption_html
+    );
+
+    // Return it
+    return $html;
   }
 
 
