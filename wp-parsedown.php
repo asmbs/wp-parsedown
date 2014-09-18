@@ -230,7 +230,7 @@ class WP_Parsedown
       '<img id="image-%1$s" src="%2$s" alt="%3$s" />',
       $attrs['id'],
       $src,
-      $attrs['alt']
+      empty( $attrs['alt'] ) ? '' : $attrs['alt']
     );
 
     // Wrap the image HTML in an anchor if URL was given
