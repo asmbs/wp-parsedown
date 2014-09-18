@@ -31,7 +31,8 @@ class WP_Parsedown
     require_once $this->path .'parsedown/Parsedown.php';
     require_once $this->path .'parsedown/ParsedownExtra.php';
 
-    $this->parser = new ParsedownExtra;
+    $this->parser = new ParsedownExtra();
+    $this->parser->setAutolinksEnabled( false );
 
     // Init
     add_action( 'init', [ &$this, 'init' ] );
@@ -61,7 +62,7 @@ class WP_Parsedown
   public function init()
   {
     remove_filter( 'the_content', 'wpautop' );
-    add_filter( 'the_content', [ &$this, 'parse' ], 1 );
+    add_filter( 'the_content', [ $this, 'parse' ], 1 );
   }
 
   // Runs on admin_enqueue_scripts; enqueues JS on editor pages.
@@ -288,7 +289,7 @@ class WP_Parsedown
   // manually too.
   public function parse( $content )
   {
-    return $this->parser->parse( $content );
+    return $this->parser->text( $content );
   }
 
   // Get single object instance.
