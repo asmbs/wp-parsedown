@@ -29,7 +29,9 @@ class WP_Parsedown
 
     // Include Parsedown and get an instance of it.
     require_once $this->path .'parsedown/Parsedown.php';
-    $this->parser = Parsedown::instance();
+    require_once $this->path .'parsedown/ParsedownExtra.php';
+
+    $this->parser = new ParsedownExtra;
 
     // Init
     add_action( 'init', [ &$this, 'init' ] );
