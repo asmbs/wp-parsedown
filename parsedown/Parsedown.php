@@ -66,6 +66,15 @@ class Parsedown
         return $this;
     }
 
+    private $autolinksEnabled;
+
+    function setAutolinksEnabled($autolinksEnabled)
+    {
+        $this->autolinksEnabled = $autolinksEnabled;
+
+        return $this;
+    }
+
     #
     # Lines
     #
@@ -1033,6 +1042,9 @@ class Parsedown
 
     protected function identifyUrl($Excerpt)
     {
+        if ( ! $this->autolinksEnabled)
+            return;
+        
         if ( ! isset($Excerpt['text'][1]) or $Excerpt['text'][1] !== '/')
         {
             return;
