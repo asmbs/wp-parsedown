@@ -1,11 +1,11 @@
 <?php
-// -- wp-parsedown | v0.5.0 | MIT License | @friartuck6000
+// -- wp-parsedown | v0.5.1 | MIT License | @friartuck6000
 // ---------------------------------------------------------------------
 
 // Plugin Name:  WP Parsedown
 // Plugin URI:   https://github.com/friartuck6000/wp-parsedown
 // Description:  A wrapper for Parsedown that lets you use Markdown in WordPress.
-// Version:      0.5.0
+// Version:      0.5.1
 // Author:       Kyle Tucker
 // Author URI:   https://github.com/friartuck6000
 
@@ -29,7 +29,10 @@ class WP_Parsedown
 
     // Include Parsedown and get an instance of it.
     require_once $this->path .'parsedown/Parsedown.php';
-    $this->parser = Parsedown::instance();
+    require_once $this->path .'parsedown/ParsedownExtra.php';
+
+    $this->parser = new ParsedownExtra();
+    $this->parser->setAutolinksEnabled( false );
 
     // Init
     add_action( 'init', [ &$this, 'init' ] );
@@ -59,7 +62,7 @@ class WP_Parsedown
   public function init()
   {
     remove_filter( 'the_content', 'wpautop' );
-    add_filter( 'the_content', [ &$this, 'parse' ], 1 );
+    add_filter( 'the_content', [ $this, 'parse' ], 1 );
   }
 
   // Runs on admin_enqueue_scripts; enqueues JS on editor pages.
@@ -227,7 +230,7 @@ class WP_Parsedown
       '<img id="image-%1$s" src="%2$s" alt="%3$s" />',
       $attrs['id'],
       $src,
-      $attrs['alt']
+      empty( $attrs['alt'] ) ? '' : $attrs['alt']
     );
 
     // Wrap the image HTML in an anchor if URL was given
@@ -286,7 +289,7 @@ class WP_Parsedown
   // manually too.
   public function parse( $content )
   {
-    return $this->parser->parse( $content );
+    return $this->parser->text( $content );
   }
 
   // Get single object instance.
