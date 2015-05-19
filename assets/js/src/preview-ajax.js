@@ -22,11 +22,18 @@
           action: 'update_preview',
           content: $content.val()
         },
+        async: true,
+        timeout: 2500,
         success: function(d){
           $this.removeAttr('style');
           $this.html(d);
         },
-        error: function(e){
+        error: function(xhr, status, httpError){
+          var msg = '<p>Unable to load preview. <b>Reason:</b> ';
+          msg += status ? status : 'unknown';
+          msg += '</p>';
+          $this.html(msg);
+
           console.log(e);
         }
       });
