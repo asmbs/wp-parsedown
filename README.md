@@ -13,6 +13,10 @@ A [Parsedown][parsedown] wrapper for WordPress. When activated, this plugin comp
 
 ## Release Notes
 
+### v0.5.2
+
+* Added a timeout to the previewer AJAX call to prevent hanging when trying to parse an enormous page.
+
 ### v0.5.1
 
 * Updated Parsedown to `v1.0.1`
