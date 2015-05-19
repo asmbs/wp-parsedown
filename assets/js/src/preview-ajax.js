@@ -11,10 +11,16 @@
       var $this = $(this);
       var $content = $('#content');
 
+      if ($content.val().length > (16 * 1024)) { // 16kb
+        $this.html('<p>Unable to load preview; content exceeds maximum length of 16kb (16,000 characters).</p>');
+        return false;
+      }
+
       $this.css({
         opacity: '0.5'
       });
-      $.ajax({
+
+      var xhr = $.ajax({
         url: ajaxurl,
         type: 'POST',
         dataType: 'html',
@@ -22,23 +28,20 @@
           action: 'update_preview',
           content: $content.val()
         },
-        async: true,
-        timeout: 2500,
         success: function(d){
-          $this.removeAttr('style');
           $this.html(d);
         },
         error: function(xhr, status, httpError){
-          var msg = '<p>Unable to load preview. <b>Reason:</b> ';
+          var msg = '<p>Unable to load preview. (';
           msg += status ? status : 'unknown';
-          msg += '</p>';
+          msg += ')</p>';
           $this.html(msg);
-
-          console.log(e);
+        },
+        complete: function(xhr, status) {
+          $this.removeAttr('style');
         }
       });
 
-      console.log('updated!');
     });
   };
 
