@@ -1,0 +1,16 @@
+{
+    "name": "friartuck6000/wp-parsedown",
+    "description": "Disable the WYSIWYG editor and author content in Markdown, with a live preview",
+    "type": "wordpress-plugin",
+    "require": {
+        "erusev/parsedown": "^1.6",
+        "composer/installers": "^1.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kyle Tucker",
+            "email": "kyleatucker@gmail.com"
+        }
+    ]
+}
