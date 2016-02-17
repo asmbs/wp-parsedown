@@ -4,6 +4,7 @@
     "type": "wordpress-plugin",
     "require": {
         "erusev/parsedown": "^1.6",
+        "erusev/parsedown-extra": "^0.7",
         "composer/installers": "^1.0"
     },
     "license": "MIT",
