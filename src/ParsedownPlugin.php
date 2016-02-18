@@ -180,8 +180,40 @@ class ParsedownPlugin
      * @param   string  $content  Content between opening and closing tags.
      * @return  string
      */
-    public function parseImageShortcode($attrs, $content = '')
-    {}
+    public function parseImageShortcode(array $attrs, $content = '')
+    {
+        $src = wp_get_attachment_url($attrs['id']);
+
+        // Generate image tag
+        $imageHtml = sprintf(
+            '<img id="image-%1$s" src="%3$s" alt="%2$s">',
+            $attrs['id'],
+            array_key_exists('alt', $attrs) ? $attrs['alt'] : '',
+            $src
+        );
+
+        // If a URL is set, wrap the image in a link
+        if (array_key_exists('url', $attrs)) {
+            $imageHtml = sprintf('<a href="%s">%s</a>', $attrs['url'], $imageHtml);
+        }
+
+        // Build caption if one is set
+        $captionHtml = '';
+        if (array_key_exists('caption', $attrs)) {
+            $captionHtml = sprintf('<figcaption>%s</figcaption>', $attrs['caption']);
+        }
+
+        $html = sprintf(
+            '<figure id="figure-%1$s" class="image %2$s %3$s">%4$s %5$s</figure>',
+            $attrs['id'],
+            $attrs['align'],
+            $attrs['size'],
+            $imageHtml,
+            $captionHtml
+        );
+
+        return apply_filters('parsedown/parse_image_shortcode', $html, $attrs);
+    }
 
     /**
      * Run the parser.
