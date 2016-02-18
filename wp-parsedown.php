@@ -11,6 +11,7 @@
  * @author  Kyle Tucker <kyleatucker@gmail.com>
  */
 
-require_once __DIR__ .'/vendor/autoload.php';
+// A proper composer-installed WordPress instance will handle autoloading on its own
+// require_once __DIR__ .'/vendor/autoload.php';
 
 $GLOBALS['parsedown'] = new Ft6k\WpParsedown\ParsedownPlugin(new ParsedownExtra(), __DIR__);
