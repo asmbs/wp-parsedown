@@ -4,5 +4,6 @@
         $('#postdivrich').append($aceEditor);
 
         var aceEditor = ace.edit('ace-editor');
+        aceEditor.getSession().setMode('ace/mode/markdown');
     });
 }(jQuery, window, document);
