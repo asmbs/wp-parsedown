@@ -13,4 +13,4 @@
 
 require_once __DIR__ .'/vendor/autoload.php';
 
-$GLOBALS['parsedown'] = new Ft6k\WpParsedown\ParsedownPlugin(new ParsedownExtra());
+$GLOBALS['parsedown'] = new Ft6k\WpParsedown\ParsedownPlugin(new ParsedownExtra(), __DIR__);
