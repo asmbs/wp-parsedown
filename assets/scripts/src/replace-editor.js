@@ -52,7 +52,7 @@
         parsedown.replaceEditor('ace-editor');
 
         // Listen on autosave and form submit
-        $(w).on('before-autosave', parsedown, this.syncContent);
+        // $(w).on('before-autosave', parsedown, this.syncContent);
         $('form#post').on('submit', parsedown, this.syncContent);
     });
 }(jQuery, window, document);

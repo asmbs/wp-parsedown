@@ -20,6 +20,15 @@ module.exports = function(grunt) {
                 files: {
                     '<%= paths.scripts_dist %>/editor.min.js': '<%= paths.scripts_src %>/*.js'
                 }
+            },
+            dev: {
+                options: {
+                    mangle: false,
+                    beautify: true
+                },
+                files: {
+                    '<%= paths.scripts_dist %>/editor.min.js': '<%= paths.scripts_src %>/*.js'
+                }
             }
         },
         less: {
