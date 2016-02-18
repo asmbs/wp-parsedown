@@ -1,34 +1,39 @@
 module.exports = function(grunt) {
 
-  grunt.initConfig({
-    uglify: {
-      all: {
-        options: {
-          mangle: {
-            except: ['jQuery']
-          }
-        },
-        files: {
-          'assets/js/dist/scripts.min.js': ['assets/js/src/*.js']
-        }
-      }
-    },
-    less: {
-      all: {
-        options: {
-          cleancss: true
-        },
-        files: {
-          'assets/css/admin.min.css': ['assets/less/admin.less']
-        }
-      }
-    }
-  });
+    require('load-grunt-tasks')(grunt);
+    require('time-grunt')(grunt);
 
-  // grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        asset_path: 'assets',
+        paths: {
+            scripts_src:  '<%= asset_path %>/scripts/src',
+            scripts_dist: '<%= asset_path %>/scripts/dist',
+            styles_src:   '<%= asset_path %>/styles/src',
+            styles_dist:  '<%= asset_path %>/styles/dist',
+        },
+        uglify: {
+            build: {
+                options: {
+                    mangle: { except: ['jQuery'] }
+                },
+                files: {
+                    '<%= paths.scripts_dist %>/editor.min.js': '<%= paths.scripts_src %>/*.js'
+                }
+            }
+        },
+        less: {
+            build: {
+                options: {
+                    cleancss: true
+                },
+                files: {
+                    '<%= paths.styles_dist %>/admin.min.css': '<%= paths.styles_src %>/admin.less'
+                }
+            }
+        }
+    });
 
-  grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', ['less:build', 'uglify:build']);
 
 };

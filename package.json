@@ -1,15 +1,25 @@
 {
   "name": "wp-parsedown",
-  "version": "0.5.3",
+  "private": "true",
+  "version": "1.0.0-dev",
   "author": "Kyle Tucker <kyleatucker@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/friartuck6000/wp-parsedown.git"
+  },
+  "bugs": {
+    "url": "https://github.com/friartuck6000/wp-parsedown/issues"
+  },
+  "homepage": "https://github.com/friartuck6000/wp-parsedown#readme",
   "engines": {
     "node": ">= 0.10.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-uglify": "~0.2.4",
-    "grunt-contrib-less": "~0.10.0"
+    "grunt": "^0.4.5",
+    "grunt-contrib-less": "^1.2.0",
+    "grunt-contrib-uglify": "^0.11.1",
+    "load-grunt-tasks": "^3.4.0",
+    "time-grunt": "^1.3.0"
   }
 }
