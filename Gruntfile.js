@@ -40,6 +40,12 @@ module.exports = function(grunt) {
                     '<%= paths.styles_dist %>/admin.min.css': '<%= paths.styles_src %>/admin.less'
                 }
             }
+        },
+        watch: {
+            all: {
+                files: ['<%= paths.scripts_src %>/*.js', '<%= paths.styles_src %>/*.less'],
+                tasks: ['uglify:dev', 'less']
+            }
         }
     });
 
