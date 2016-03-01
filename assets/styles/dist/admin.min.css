@@ -1,0 +1,8 @@
+#ace-editor {
+  border: 1px solid #e0e0e0;
+  margin-bottom: 3px;
+}
+#ace-editor.ace_focus {
+  border-color: #5b9dd9;
+  box-shadow: 0 0 2px rgba(30, 140, 190, 0.8);
+}
