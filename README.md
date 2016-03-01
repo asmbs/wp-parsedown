@@ -4,13 +4,11 @@
 
 # WP Parsedown
 
-A [Parsedown][parsedown] wrapper for WordPress. When activated, this plugin completely disables the visual editor. It also introduces a real-time preview box in the editor, so you can preview your parsed Markdown as you're writing it.
+A [Parsedown](https://github.com/erusev/parsedown) wrapper for WordPress. Completely disables the visual (WYSIWYG) editor and replaces the plain text box with the [Ace](https://ace.c9.io/#nav=about) text editor, complete with Markdown syntax highlighting.
 
-**Additional features:**
-
-*   Inserting an image via the Media Library generates a clean shortcode, rather than an ugly `img` or `figure` conglomeration.
-*   A cheatsheet is available under the **Help** pull-down in the editor.
+**Coming soon:** Live content previews.
 
 ## Release Notes
 
 Check the [changelog](CHANGELOG.md).
+

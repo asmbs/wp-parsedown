@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0
+* Added composer support and majorly refined codebase
+* Now uses the [Ace](https://ace.c9.io/#nav=about) editor for more Markdown-friendly editing
+* **Removed** the live preview meta box; it'll be back soon!
+
+-----
+
 ### 0.5.3
 
 * Switched to using a character limit (16k characters) instead of time limit
