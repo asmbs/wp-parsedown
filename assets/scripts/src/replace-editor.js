@@ -13,6 +13,7 @@
                 minLines: 24,
                 maxLines: 1024,
                 showInvisibles: true,
+                showPrintMargin: false,
             },
             aceTheme: 'ace/theme/clouds',
             syncDelay: 500
