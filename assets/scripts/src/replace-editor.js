@@ -14,8 +14,9 @@
                 maxLines: 1024,
                 showInvisibles: true,
                 showPrintMargin: false,
+                fontSize: 13,
             },
-            aceTheme: 'ace/theme/clouds',
+            aceTheme: 'ace/theme/tomorrow',
             syncDelay: 500
         },
 
