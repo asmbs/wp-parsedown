@@ -3,17 +3,22 @@
     $.parsedown = {
 
         aceObject: null,
+        aceSession: null,
+        syncTimer: null,
         $wpEditor: null,
 
         options: {
             aceId: 'ace-editor',
             aceOptions: {
                 minLines: 24,
-                maxLines: 1024
-            }
+                maxLines: 1024,
+                showInvisibles: true,
+            },
+            aceTheme: 'ace/theme/clouds',
+            syncDelay: 500
         },
 
-        replaceEditor: function(editorId) {
+        initEditor: function(editorId) {
             // Initialize Ace container
             var $aceContainer = $(d.createElement('pre')).attr('id', this.options.aceId);
 
@@ -23,22 +28,51 @@
                 $statusBar = $('#post-status-info');
 
             // Grab editor content
-            var currentContent = this.$wpEditor = $wpEditor.val();
+            this.$wpEditor = $wpEditor;
+            var currentContent = $wpEditor.val();
 
             // Hide wrap and insert the Ace container
-            // $wpEditorWrap.hide();
+            $wpEditorWrap.hide();
             $aceContainer.insertBefore($statusBar);
 
             // Initialize the actual Ace editor
-            var _ace = this.aceObject = w.ace.edit(this.options.aceId);
+            var _ace = this.aceObject = w.ace.edit(this.options.aceId),
+                _aceSession = this.aceSession = _ace.getSession();
             _ace.setOptions(this.options.aceOptions);
-            _ace.getSession().setMode('ace/mode/markdown');
-            _ace.setValue(currentContent);
+            _ace.setTheme(this.options.aceTheme);
+
+            // Set session options
+            _aceSession.setMode('ace/mode/markdown');
+            _aceSession.setUseWrapMode(true);
+
+            // Initialize editor content
+            _ace.setValue(currentContent, -1);
+
+            // Register sync handler
+            $(w).on('sync.parsedown', this.syncContent);
+
+            // Set key listener and submit listener
+            $aceContainer.on('keyup', this.armTrigger);
+            $(w).on('submit.parsedown', this.fireTrigger);
         },
 
-        syncContent: function(e) {
-            var parsedown = e.data;
-            parsedown.$wpEditor.val(parsedown.aceObject.getValue());
+        armTrigger: function() {
+            var _p = $.parsedown;
+            if (_p.syncTimer) {
+                clearTimeout(_p.syncTimer);
+            }
+            _p.syncTimer = setTimeout(_p.fireTrigger, _p.options.syncDelay);
+        },
+
+        fireTrigger: function() {
+            $(w).trigger('sync.parsedown');
+
+            return true;
+        },
+
+        syncContent: function() {
+            var _p = $.parsedown;
+            _p.$wpEditor.val(_p.aceObject.getValue());
         }
     };
 
@@ -49,10 +83,10 @@
             _ace = $.parsedown.aceObject;
 
         // Replace the editor
-        parsedown.replaceEditor('ace-editor');
+        parsedown.initEditor('ace-editor');
 
         // Listen on autosave and form submit
         // $(w).on('before-autosave', parsedown, this.syncContent);
-        $('form#post').on('submit', parsedown, this.syncContent);
+        $(w).on('submit submit.autosave-local', parsedown, this.syncContent);
     });
 }(jQuery, window, document);
