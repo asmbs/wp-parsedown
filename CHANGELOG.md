@@ -1,11 +1,14 @@
 # Changelog
 
-## 1.0.0
+## 1.0.1
+* Removed a duplicate submit binding in the editor JS that was causing post previews to fail.
+
+-----
+
+### 1.0.0
 * Added composer support and majorly refined codebase
 * Now uses the [Ace](https://ace.c9.io/#nav=about) editor for more Markdown-friendly editing
 * **Removed** the live preview meta box; it'll be back soon!
-
------
 
 ### 0.5.3
 
