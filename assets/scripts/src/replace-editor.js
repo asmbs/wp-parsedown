@@ -86,9 +86,5 @@
 
         // Replace the editor
         parsedown.initEditor('ace-editor');
-
-        // Listen on autosave and form submit
-        // $(w).on('before-autosave', parsedown, this.syncContent);
-        $(w).on('submit submit.autosave-local', parsedown, this.syncContent);
     });
 }(jQuery, window, document);
