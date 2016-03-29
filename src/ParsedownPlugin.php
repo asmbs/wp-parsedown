@@ -82,8 +82,16 @@ class ParsedownPlugin
      */
     public function init()
     {
+        // Remove some core filters
         remove_filter('the_content', 'wpautop');
-        add_filter('the_content', [$this, 'parseContent'], 1);
+        remove_filter('the_content', 'convert_smilies');
+
+        // Adjust filter priorities
+        remove_filter('the_content', 'wptexturize');
+        add_filter('the_content', 'wptexturize', 16);
+
+        // Add the parser filter
+        add_filter('the_content', [$this, 'parseContent']);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -204,8 +212,6 @@ class ParsedownPlugin
         // Get attachment image details
         $size = has_image_size($attrs['size']) ? $attrs['size'] : 'medium';
         $src = wp_get_attachment_image_src((int) $attrs['id'], $size);
-
-        var_dump($attrs);
 
         /**
          * Allow filtering of image tag classes.
