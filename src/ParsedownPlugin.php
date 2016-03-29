@@ -128,7 +128,7 @@ class ParsedownPlugin
     public function enqueueAdminScripts($hook)
     {
         if (in_array($hook, ['post.php', 'post-new.php'])) {
-            wp_enqueue_script('parsedown_js', $this->url('assets/scripts/dist/editor.min.js', ['jquery', 'ace_editor'], null));
+            wp_enqueue_script('parsedown_js', $this->url('assets/scripts/dist/editor.min.js'), ['jquery', 'ace_editor'], null);
 
             wp_enqueue_script('ace_editor', '//cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js', [], null);
             wp_enqueue_script('ace_markdown', 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-markdown.js', ['ace_editor'], null);
