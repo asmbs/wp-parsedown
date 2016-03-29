@@ -160,7 +160,7 @@ class ParsedownPlugin
         // Add "optional" attributes
         $extraAttributes = '';
         if ($url) {
-            $appendAttribute($extraAttributes, 'url', $url);
+            $appendAttribute($extraAttributes, 'href', $url);
         }
         if ($caption) {
             $appendAttribute($extraAttributes. 'caption', $caption);
@@ -191,24 +191,72 @@ class ParsedownPlugin
      */
     public function parseImageShortcode(array $attrs, $content = '')
     {
-        $src = wp_get_attachment_url($attrs['id']);
+        // Normalize attributes
+        $attrs = shortcode_atts([
+            'id'      => 0,
+            'href'    => false,
+            'alt'     => '',
+            'caption' => false,
+            'align'   => false,
+            'size'    => 'medium',
+        ], $attrs);
+
+        // Get attachment image details
+        $size = has_image_size($attrs['size']) ? $attrs['size'] : 'medium';
+        $src = wp_get_attachment_image_src((int) $attrs['id'], $size);
+
+        var_dump($attrs);
+
+        /**
+         * Allow filtering of image tag classes.
+         *
+         * @param   string[]  $imgClasses
+         * @param   array     $attrs
+         * @return  string[]
+         */
+        $imgClasses = apply_filters('parsedown/image/img_classes', [], $attrs);
 
         // Generate image tag
-        $imageHtml = sprintf(
-            '<img id="image-%1$s" src="%3$s" alt="%2$s">',
+        $imgHtml = sprintf(
+            '<img id="image-%1$s" class="%4$s" src="%2$s" alt="%3$s">',
             $attrs['id'],
-            array_key_exists('alt', $attrs) ? $attrs['alt'] : '',
-            $src
+            $src[0],
+            $attrs['alt'],
+            implode(' ', $imgClasses)
         );
 
-        // If a URL is set, wrap the image in a link
-        if (array_key_exists('url', $attrs)) {
-            $imageHtml = sprintf('<a href="%s">%s</a>', $attrs['url'], $imageHtml);
+        if ($attrs['href']) {
+
+            /**
+             * Allow filtering of the image link URL.
+             *
+             * @param   string  $url
+             * @param   array   $attrs
+             * @return  string
+             */
+            $attrs['href'] = apply_filters('parsedown/image/link_href', $attrs['href'], $attrs);
+
+            /**
+             * Allow filtering of image link classes.
+             *
+             * @param   string[]  $linkClasses
+             * @param   array     $attrs
+             * @return  string[]
+             */
+            $linkClasses = apply_filters('parsedown/image/link_classes', [], $attrs);
+
+            // Wrap image in an anchor
+            $imgHtml = sprintf(
+                '<a href="%1$s" class="%3$s">%2$s</a>',
+                $attrs['href'],
+                $imgHtml,
+                implode(' ', $linkClasses)
+            );
         }
 
         // Build caption if one is set
         $captionHtml = '';
-        if (array_key_exists('caption', $attrs)) {
+        if ($attrs['caption']) {
             $captionHtml = sprintf('<figcaption>%s</figcaption>', $attrs['caption']);
         }
 
@@ -217,7 +265,7 @@ class ParsedownPlugin
             $attrs['id'],
             $attrs['align'],
             $attrs['size'],
-            $imageHtml,
+            $imgHtml,
             $captionHtml
         );
 
