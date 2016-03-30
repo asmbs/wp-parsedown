@@ -88,7 +88,8 @@ class ParsedownPlugin
         remove_filter('the_content', 'wptexturize');
         add_filter('the_content', 'wptexturize', 20);
 
-        // Add the parser filter
+        // Add parsing filters
+        add_filter('the_content', [$this, 'addBlockFlags'], 14);
         add_filter('the_content', [$this, 'parseContent'], 15);
     }
 
@@ -285,5 +286,55 @@ class ParsedownPlugin
     public function parseContent($content)
     {
         return $this->parser->text($content);
+    }
+
+    /**
+     * Add `markdown="1"` flags to block-level elements in content. MUST be run _before_
+     * parsing to ensure that block-nested Markdown can be parsed.
+     *
+     * @param   string  $content
+     * @return  string
+     */
+    public function addBlockFlags($content)
+    {
+        // Set the list of elements to mark
+        $blocks = [
+            'address',
+            'article',
+            'aside',
+            'blockquote',
+            'dd',
+            'div',
+            'figcaption',
+            'footer',
+            'form',
+            'header',
+            'main',
+            'nav',
+            'noscript',
+            'output',
+            'section',
+        ];
+
+        $regex = sprintf('/< *(%s) *([^>]*)>/i', implode('|', $blocks));
+
+        if (preg_match_all($regex, $content, $m, PREG_OFFSET_CAPTURE)) {
+            // Set the flag attribute and get its length
+            $flagAttr = ' markdown="1"';
+            $flagLength = strlen($flagAttr);
+
+            $attrs = $m[2];
+            for ($i = 0; $i < count($attrs); $i++) {
+                // Adjust the replacement offset at each iteration to account for the length of the
+                // flag attribute added in the last iteration
+                $offsetAdjust = $i * $flagLength;
+
+                list($string, $pos) = $attrs[$i];
+                // Append the flag
+                $content = substr_replace($content, $string . $flagAttr, $pos + $offsetAdjust, strlen($string));
+            }
+        }
+
+        return $content;
     }
 }
