@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+_Well, that didn't take long._
+
+* Replaced the quote unescaper with a filter to add `markdown="1"	` to block-level elements, taking advantage of [Markdown Extra's ability](https://michelf.ca/projects/php-markdown/extra/#markdown-attr) to handle nested formatting natively.
+* Adjusted filter priorities _again_
+
 ## 1.0.2
 * Adjusted filter priorities to make sure Markdown parsing is done at the correct point in the filter chain.
 * Added an additional filter to unescape quotes in shortcode definitions, since shortcodes must be processed _after_ parsing. 
