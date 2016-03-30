@@ -1,9 +1,14 @@
 # Changelog
 
-## 1.0.1
-* Removed a duplicate submit binding in the editor JS that was causing post previews to fail.
+## 1.0.2
+* Adjusted filter priorities to make sure Markdown parsing is done at the correct point in the filter chain.
+* Added an additional filter to unescape quotes in shortcode definitions, since shortcodes must be processed _after_ parsing. 
+* Refactored image shortcode.
 
 -----
+
+### 1.0.1
+* Removed a duplicate submit binding in the editor JS that was causing post previews to fail.
 
 ### 1.0.0
 * Added composer support and majorly refined codebase
