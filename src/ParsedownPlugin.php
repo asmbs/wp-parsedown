@@ -65,12 +65,10 @@ class ParsedownPlugin
         // TODO: Add preview box hooks
 
         // Enqueue plugin scripts for editing view
-        // TODO: implement script enqueuer
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
 
         // Register the image shortcode and use it in place of HTML when inserting media
         // into a post
-        // TODO: implement image shortcode and send filter
         add_filter('image_send_to_editor', [$this, 'filterImageMarkup'], 100, 8);
         add_shortcode(self::IMG_SHORTCODE, [$this, 'parseImageShortcode']);
 
