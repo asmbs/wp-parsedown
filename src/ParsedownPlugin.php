@@ -92,6 +92,7 @@ class ParsedownPlugin
 
         // Add the parser filter
         add_filter('the_content', [$this, 'parseContent']);
+        add_filter('the_content', [$this, 'unescapeShortcodeQuotes']);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
@@ -287,5 +288,26 @@ class ParsedownPlugin
     public function parseContent($content)
     {
         return $this->parser->text($content);
+    }
+
+    /**
+     * Unescape double quotes within shortcode definitions.
+     *
+     * @param   string  $content
+     * @return  string
+     */
+    public function unescapeShortcodeQuotes($content)
+    {
+        // Find all shortcode definitions and their positions
+        if (preg_match_all('/\[[^\[\]]+\/?\]/i', $content, $matches, PREG_OFFSET_CAPTURE)) {
+            foreach ($matches[0] as $match) {
+                // Get matched string and offset
+                list($original, $offset) = $match;
+                $corrected = str_replace('&quot;', '"', $original);
+                $content = substr_replace($content, $corrected, $offset, strlen($original));
+            }
+        }
+
+        return $content;
     }
 }
