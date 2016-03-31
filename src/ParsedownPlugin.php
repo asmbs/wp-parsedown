@@ -205,12 +205,19 @@ class ParsedownPlugin
             'alt'     => '',
             'caption' => false,
             'align'   => false,
-            'size'    => 'medium',
+            'size'    => 'large',
         ], $attrs);
 
-        // Get attachment image details
-        $size = has_image_size($attrs['size']) ? $attrs['size'] : 'medium';
-        $src = wp_get_attachment_image_src((int) $attrs['id'], $size);
+        // Get image URL
+        if ($attrs['size'] == 'full') {
+            $src = wp_get_attachment_url($attrs['id']);
+        } else {
+            $size = in_array($attrs['size'], get_intermediate_image_sizes()) ? $attrs['size'] : 'medium';
+            $src = wp_get_attachment_image_src($attrs['id'], $size);
+            if ($src) {
+                $src = $src[0];
+            }
+        }
 
         /**
          * Allow filtering of image tag classes.
@@ -225,7 +232,7 @@ class ParsedownPlugin
         $imgHtml = sprintf(
             '<img class="%4$s" src="%2$s" alt="%3$s">',
             $attrs['id'],
-            $src[0],
+            $src,
             $attrs['alt'],
             implode(' ', $imgClasses)
         );
