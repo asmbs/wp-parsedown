@@ -1,11 +1,14 @@
 # Changelog
 
-## 1.0.5
+## 1.0.6
+* Fixed image sizing when using the shortcode.
+
+-----
+
+### 1.0.5
 * Adjusted image shortcode to use better figure classes.
 * Removed ID attributes from both the `figure` and `img` so it's possible to use the same image twice on one page.
 * Removed a bunch of leftover files from early releases.
-
------
 
 ### 1.0.4
 * Yes, I had to create a hotfix for not incrementing the version number of my last hotfix. Leave me alone.
