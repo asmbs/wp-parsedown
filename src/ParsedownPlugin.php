@@ -223,7 +223,7 @@ class ParsedownPlugin
 
         // Generate image tag
         $imgHtml = sprintf(
-            '<img id="image-%1$s" class="%4$s" src="%2$s" alt="%3$s">',
+            '<img class="%4$s" src="%2$s" alt="%3$s">',
             $attrs['id'],
             $src[0],
             $attrs['alt'],
@@ -265,16 +265,39 @@ class ParsedownPlugin
             $captionHtml = sprintf('<figcaption>%s</figcaption>', $attrs['caption']);
         }
 
+        // Set up figure element classes
+        $figureClasses = ['img', 'img-'. $attrs['id']];
+        if ($attrs['size']) {
+            $figureClasses[] = 'img-size-'. $attrs['size'];
+        }
+        if ($attrs['align'] && in_array($attrs['align'], ['left', 'center', 'right'])) {
+            $figureClasses[] = 'img-align-'. $attrs['align'];
+        }
+
+        /**
+         * Filter figure classes.
+         *
+         * @param   string[]  $figureClasses
+         * @param   array     $attrs
+         * @return  string[]
+         */
+        $figureClasses = apply_filters('parsedown/image/figure_classes', $figureClasses, $attrs);
+
         $html = sprintf(
-            '<figure id="figure-%1$s" class="image %2$s %3$s">%4$s %5$s</figure>',
-            $attrs['id'],
-            $attrs['align'],
-            $attrs['size'],
+            '<figure class="%3$s">%1$s %2$s</figure>',
             $imgHtml,
-            $captionHtml
+            $captionHtml,
+            implode(' ', $figureClasses)
         );
 
-        return apply_filters('parsedown/parse_image_shortcode', $html, $attrs);
+        /**
+         * Filter the final output.
+         *
+         * @param   string  $html
+         * @param   array   $attrs
+         * @return  string
+         */
+        return apply_filters('parsedown/image/output', $html, $attrs);
     }
 
     /**
