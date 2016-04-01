@@ -18,4 +18,7 @@ if (file_exists($autoloader)) {
     require_once $autoloader;
 }
 
-$GLOBALS['parsedown'] = new Ft6k\WpParsedown\ParsedownPlugin(new ParsedownExtra(), __FILE__);
+$GLOBALS['parsedown'] = new Ft6k\WpParsedown\ParsedownPlugin(
+    new \Ft6k\WpParsedown\ParsedownModified(),
+    __FILE__
+);
