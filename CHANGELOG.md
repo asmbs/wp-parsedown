@@ -1,9 +1,12 @@
 # Changelog
 
-## 1.0.6
-* Fixed image sizing when using the shortcode.
+## 1.0.7
+* Replaced `ParsedownExtra` with an extension that removes support for indent-triggered code blocks. Previously, this feature of the Markdown specification would cause shortcode-generated HTML to be interpreted as a code block.
 
 -----
+
+### 1.0.6
+* Fixed image sizing when using the shortcode.
 
 ### 1.0.5
 * Adjusted image shortcode to use better figure classes.
