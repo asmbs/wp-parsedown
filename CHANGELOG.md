@@ -1,9 +1,10 @@
 # Changelog
 
-## 1.0.7
-* Replaced `ParsedownExtra` with an extension that removes support for indent-triggered code blocks. Previously, this feature of the Markdown specification would cause shortcode-generated HTML to be interpreted as a code block.
+## 1.0.8 (current)
+* JS now checks to make sure the editor is enabled before trying to replace it with the Ace editor.
 
------
+### 1.0.7
+* Replaced `ParsedownExtra` with an extension that removes support for indent-triggered code blocks. Previously, this feature of the Markdown specification would cause shortcode-generated HTML to be interpreted as a code block.
 
 ### 1.0.6
 * Fixed image sizing when using the shortcode.
