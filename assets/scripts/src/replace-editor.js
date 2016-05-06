@@ -21,6 +21,7 @@
         },
 
         initEditor: function(editorId) {
+
             // Initialize Ace container
             var $aceContainer = $(d.createElement('pre')).attr('id', this.options.aceId);
 
@@ -28,6 +29,10 @@
             var $wpEditorWrap = $('#wp-content-wrap'),
                 $wpEditor = $('textarea#content'),
                 $statusBar = $('#post-status-info');
+
+            if ($wpEditorWrap.length == 0) {
+                return false;
+            }
 
             // Grab editor content
             this.$wpEditor = $wpEditor;
