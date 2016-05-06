@@ -1,7 +1,7 @@
 {
   "name": "wp-parsedown",
   "private": "true",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "author": "Kyle Tucker <kyleatucker@gmail.com>",
   "license": "MIT",
   "repository": {
