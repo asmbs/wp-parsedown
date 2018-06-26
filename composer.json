@@ -1,5 +1,5 @@
 {
-    "name": "friartuck6000/wp-parsedown",
+    "name": "asmbs/wp-parsedown",
     "description": "Disable the WYSIWYG editor and author content in Markdown, with a live preview",
     "type": "wordpress-plugin",
     "license": "MIT",
