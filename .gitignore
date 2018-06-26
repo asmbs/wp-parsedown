@@ -3,3 +3,5 @@
 
 # Dang it, PHPStorm
 .idea/
+
+/vendor/

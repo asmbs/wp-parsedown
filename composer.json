@@ -1,0 +1,13 @@
+{
+    "name": "asmbs/wp-parsedown",
+    "description": "A wrapper for Parsedown that lets you use Markdown in WordPress.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kyle Tucker",
+            "email": "kyleatucker@gmail.com"
+        }
+    ],
+    "require": {}
+}
