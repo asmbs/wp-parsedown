@@ -13,6 +13,10 @@ A [Parsedown][parsedown] wrapper for WordPress. When activated, this plugin comp
 
 ## Release Notes
 
+### v0.5.4
+
+- Added in Parsedown fix for PHP7 support
+
 ### v0.5.3
 
 * Switched to using a character limit (16k characters) instead of time limit
