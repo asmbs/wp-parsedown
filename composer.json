@@ -1,6 +1,6 @@
 {
     "name": "asmbs/wp-parsedown",
-    "description": "Disable the WYSIWYG editor and author content in Markdown, with a live preview",
+    "description": "Parsedown wrapper for WordPress with a live preview editor",
     "type": "wordpress-plugin",
     "license": "MIT",
     "authors": [

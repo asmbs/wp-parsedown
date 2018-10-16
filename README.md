@@ -1,14 +1,54 @@
-[parsedown]: https://github.com/erusev/parsedown
-[parsedown-extra]: https://github.com/erusev/parsedown-extra
-[gfm]: https://help.github.com/articles/github-flavored-markdown
-
 # WP Parsedown
 
-A [Parsedown](https://github.com/erusev/parsedown) wrapper for WordPress. Completely disables the visual (WYSIWYG) editor and replaces the plain text box with the [Ace](https://ace.c9.io/#nav=about) text editor, complete with Markdown syntax highlighting.
+> Parsedown wrapper for WordPress with a live preview editor
 
-**Coming soon:** Live content previews.
+This plugin serves two purposes:
 
-## Release Notes
+- Replaces the classic WP editor with a Markdown editor with live preview ([SimpleMDE](https://github.com/sparksuite/simplemde-markdown-editor))
+- Forces all content to be rendered through [Parsedown](https://github.com/erusev/parsedown), converting saved Markdown content to HTML
 
-Check the [changelog](CHANGELOG.md).
+This is a fork and a departure from the original [friartuck6000/wp-parsedown](https://github.com/friartuck6000/wp-parsedown).
 
+
+
+## Requirements
+
+- PHP 7.2+
+- Composer
+
+
+
+## Installation
+
+1. Install with Composer:
+
+   ```
+   composer require asmbs/wp-parsedown
+   ```
+
+2. Activate the plugin.
+
+
+
+## Development
+
+#### Requirements
+
+- NPM
+
+#### Getting Started
+
+To install the development dependencies, run:
+
+```
+composer install
+npm install
+```
+
+To rebuild the assets, run:
+
+```
+npx webpack
+```
+
+(Requires [npx](https://www.npmjs.com/package/npx))
