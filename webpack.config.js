@@ -1,10 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -17,6 +15,13 @@ module.exports = {
     },
     module: {
         rules: [
+            {
+                test: /\.m?js$/,
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader'
+                }
+            },
             {
                 test: /\.less$/,
                 use: [
@@ -50,18 +55,10 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: "styles/[name].css",
             chunkFilename: "[id].css"
-        }),
-        new CopyWebpackPlugin([
-            { from: './assets/scripts/markdown-wp.js', to: 'scripts'}
-        ])
+        })
     ],
     optimization: {
         minimizer: [
-            new UglifyJSPlugin({
-                cache: true,
-                parallel: true,
-                sourceMap: true // set to true if you want JS source maps
-            }),
             new OptimizeCSSAssetsPlugin({})
         ]
     },

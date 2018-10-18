@@ -529,7 +529,7 @@ CodeMirror.defineMode("gfm", function (cmCfg, modeCfg) {
             // This is a RegExp for pure Markdown links that aren't a part of WP shortcodes
             var nonWPLinkRE = /\[(?:[^\[]+?)\]\(/;
             // Get the substring
-            let substring = stream.string.substr(stream.start);
+            var substring = stream.string.substr(stream.start);
             // Check for matches
             var match = nonWPLinkRE.exec(substring);
             if (!match || match.index !== 0) {

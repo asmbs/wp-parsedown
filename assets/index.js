@@ -1,3 +1,4 @@
+require("@babel/polyfill");
 import './styles/admin.less';
 import './scripts/replace-editor.js';
 
