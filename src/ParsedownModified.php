@@ -1,7 +1,6 @@
 <?php
 
-namespace Ft6k\WpParsedown;
-
+namespace ASMBS\WPParsedown;
 
 /**
  * @author  Kyle Tucker <kyleatucker@gmail.com>

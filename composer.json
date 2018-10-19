@@ -17,7 +17,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Ft6k\\WpParsedown\\": "src/"
+            "ASMBS\\WPParsedown\\": "src/"
         }
     },
     "config": {

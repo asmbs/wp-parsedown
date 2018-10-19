@@ -1,36 +1,43 @@
 {
-  "name": "wp-parsedown",
-  "version": "2.0.1",
-  "author": "Kyle Tucker <kyleatucker@gmail.com>",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/friartuck6000/wp-parsedown.git"
-  },
-  "bugs": {
-    "url": "https://github.com/friartuck6000/wp-parsedown/issues"
-  },
-  "homepage": "https://github.com/friartuck6000/wp-parsedown#readme",
-  "engines": {
-    "node": ">= 0.10.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.1.2",
-    "@babel/preset-env": "^7.1.0",
-    "autoprefixer": "^9.2.1",
-    "babel-loader": "^8.0.4",
-    "css-loader": "^1.0.0",
-    "jquery": "^3.3.1",
-    "less": "^3.6.0",
-    "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.4.4",
-    "optimize-css-assets-webpack-plugin": "^5.0.1",
-    "postcss-loader": "^3.0.0",
-    "webpack": "^4.21.0",
-    "webpack-cli": "^3.1.2"
-  },
-  "dependencies": {
-    "@babel/polyfill": "^7.0.0",
-    "simplemde": "^1.11.2"
-  }
+    "name": "wp-parsedown",
+    "version": "2.0.1",
+    "description": "Parsedown wrapper for WordPress with a live preview editor",
+    "license": "MIT",
+    "author": {
+        "name": "Kyle Tucker",
+        "email": "kyleatucker@gmail.com"
+    },
+    "contributors": [
+        {
+            "name": "Max McMahon",
+            "email": "max@asmbs.org",
+            "url": "https://github.com/maxwellmc"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/asmbs/wp-parsedown.git"
+    },
+    "engines": {
+        "node": ">= 0.10.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.1.2",
+        "@babel/preset-env": "^7.1.0",
+        "autoprefixer": "^9.2.1",
+        "babel-loader": "^8.0.4",
+        "css-loader": "^1.0.0",
+        "jquery": "^3.3.1",
+        "less": "^3.6.0",
+        "less-loader": "^4.1.0",
+        "mini-css-extract-plugin": "^0.4.4",
+        "optimize-css-assets-webpack-plugin": "^5.0.1",
+        "postcss-loader": "^3.0.0",
+        "webpack": "^4.21.0",
+        "webpack-cli": "^3.1.2"
+    },
+    "dependencies": {
+        "@babel/polyfill": "^7.0.0",
+        "simplemde": "^1.11.2"
+    }
 }
