@@ -1,0 +1,23 @@
+// Hide WP's default editor
+#wp-content-wrap {
+  display: none;
+}
+
+// Hide WP's word counter since SimpleMDE has one
+#wp-word-count {
+  display: none;
+}
+
+#markdown-editor-container {
+
+  padding-top: 20px;
+
+  #markdown-editor {
+    background-color: white;
+
+    > .editor-statusbar {
+      border: 1px solid #e0e0e0;
+      border-top: none;
+    }
+  }
+}

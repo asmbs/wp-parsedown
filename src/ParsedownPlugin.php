@@ -1,6 +1,6 @@
 <?php
 
-namespace Ft6k\WpParsedown;
+namespace ASMBS\WPParsedown;
 
 /**
  * @author  Kyle Tucker <kyleatucker@gmail.com>
@@ -61,8 +61,6 @@ class ParsedownPlugin
     {
         // Disable the WYSIWYG editor globally
         add_filter('user_can_richedit', '__return_false', 100);
-
-        // TODO: Add preview box hooks
 
         // Enqueue plugin scripts for editing view
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
@@ -135,12 +133,9 @@ class ParsedownPlugin
     public function enqueueAdminScripts($hook)
     {
         if (in_array($hook, ['post.php', 'post-new.php'])) {
-            wp_enqueue_script('parsedown_js', $this->url('assets/scripts/dist/editor.min.js'), ['jquery', 'ace_editor'], null);
+            wp_enqueue_script('parsedown_js', $this->url('dist/scripts/main.bundle.js'), ['jquery'], null, true);
 
-            wp_enqueue_script('ace_editor', '//cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/ace.js', [], null);
-            wp_enqueue_script('ace_markdown', 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.3/mode-markdown.js', ['ace_editor'], null);
-
-            wp_enqueue_style('parsedown_admin_css', $this->url('assets/styles/dist/admin.min.css'), [], false);
+            wp_enqueue_style('parsedown_admin_css', $this->url('dist/styles/main.css'), [], false);
         }
     }
 

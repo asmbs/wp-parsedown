@@ -1,6 +1,65 @@
 # Changelog
 
-## 1.0.8 (current)
+All notable changes to this project will be documented in this file.
+
+As of v3.0.0, the format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+
+As of v3.0.0, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+
+
+## [Unreleased]
+
+
+
+## [3.0.0] - 2018-10-19
+
+### Changed
+
+- Switched from Grunt to Webpack.
+- Changed editor from Ace to SimpleMDE.
+- Rewrote all JavaScript to modular ES6.
+- Changed namespace from "Ft6k" to "ASMBS".
+- Updated dependencies.
+
+### Removed
+
+- Dropped support for PHP <7.2.
+
+
+
+## [2.0.1]
+
+### Changed
+
+- Merged in the changes from v0.5.5.
+
+
+
+## [2.0.0]
+
+*Same as v1.0.8 from the original project.*
+
+
+
+## [0.5.5]
+
+### Added
+
+- Added Composer with the ASMBS namespace to support internal projects.
+
+### Fixed
+
+- Pulled in a Parsedown fix for PHP7 support.
+
+
+
+
+
+## Archive from original project
+
+### 1.0.8
+
 * JS now checks to make sure the editor is enabled before trying to replace it with the Ace editor.
 
 ### 1.0.7

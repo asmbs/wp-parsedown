@@ -2,9 +2,9 @@
 
 /**
  * Plugin Name: WP Parsedown
- * Plugin URI:  https://github.com/friartuck6000/wp-parsedown
- * Description: Disable the WYSIWYG editor and author content in Markdown, with a live preview
- * Version:     1.0.8
+ * Plugin URI:  https://github.com/asmbs/wp-parsedown
+ * Description: Parsedown wrapper for WordPress with a live preview editor
+ * Version:     3.0.0
  * Author:      Kyle Tucker
  * Author URI:  https://github.com/friartuck6000
  *
@@ -18,7 +18,7 @@ if (file_exists($autoloader)) {
     require_once $autoloader;
 }
 
-$GLOBALS['parsedown'] = new Ft6k\WpParsedown\ParsedownPlugin(
-    new \Ft6k\WpParsedown\ParsedownModified(),
+$GLOBALS['parsedown'] = new ASMBS\WPParsedown\ParsedownPlugin(
+    new \ASMBS\WPParsedown\ParsedownModified(),
     __FILE__
 );
