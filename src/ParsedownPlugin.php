@@ -85,10 +85,12 @@ class ParsedownPlugin
         // Adjust filter priorities
         remove_filter('the_content', 'wptexturize');
         add_filter('the_content', 'wptexturize', 20);
+        remove_filter('the_content', 'do_shortcode', 11);
+        add_filter('the_content', 'do_shortcode', 13);
 
         // Add parsing filters
-        add_filter('the_content', [$this, 'addBlockFlags'], 14);
-        add_filter('the_content', [$this, 'parseContent'], 15);
+        add_filter('the_content', [$this, 'addBlockFlags'], 11);
+        add_filter('the_content', [$this, 'parseContent'], 12);
     }
 
     // -----------------------------------------------------------------------------------------------------------------
