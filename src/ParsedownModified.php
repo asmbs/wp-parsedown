@@ -7,6 +7,8 @@ namespace ASMBS\WPParsedown;
  */
 class ParsedownModified extends \ParsedownExtra
 {
+    public const HTML_REGEX = '/<\/?(?:\w[\w-]*)(?:[ ]*[a-zA-Z_:][\w:.-]*(?:\s*=\s*(?:[^"\'=<>`\s]+|"[^"]*"|\'[^\']*\'))?)*[ ]*(?:\/)?>/';
+
     function __construct()
     {
         parent::__construct();
@@ -16,6 +18,15 @@ class ParsedownModified extends \ParsedownExtra
 
         # identify shortcode markers before before links
         array_unshift($this->InlineTypes['['], 'ShortcodeMarker');
+    }
+
+    #
+    # Overrides
+
+    function text($text)
+    {
+        $text = $this->forceHTMLCompliance($text);
+        return parent::text($text);
     }
 
     protected function blockCode($Line, $Block = null)
@@ -76,4 +87,37 @@ class ParsedownModified extends \ParsedownExtra
             );
         }
     }
+
+    #
+    # HTML
+
+    /**
+     * Users may paste HTML that is not compliant to the CommonMark spec
+     * (i.e. each individual HTML tag may not be on a new line).
+     * To reduce the burden on the users, we preprocess the text to force CommonMark-compliance
+     * on any HTML in the text.
+     *
+     * @see https://spec.commonmark.org/0.28/#html-blocks
+     *
+     * @param $text
+     *
+     * @return mixed
+     */
+    protected function forceHTMLCompliance($text)
+    {
+        // Find all the HTML tags (both opening and closing)
+        $matches = null;
+        preg_match_all(self::HTML_REGEX, $text, $matches, PREG_OFFSET_CAPTURE);
+
+        // Loop through all of the matched HTML tags
+        $addedOffset = 0;
+        foreach($matches[0] as $match){
+            // Add a line break into the text at the end of the matched tag
+            $endPositionOfTag = $match[1] + \strlen($match[0]) + $addedOffset;
+            $text = substr_replace($text, PHP_EOL, $endPositionOfTag, 0);
+            $addedOffset += \strlen(PHP_EOL);
+        }
+        return $text;
+    }
+
 }

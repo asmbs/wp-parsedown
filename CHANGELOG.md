@@ -12,6 +12,16 @@ As of v3.0.0, this project adheres to [Semantic Versioning](https://semver.org/s
 
 
 
+
+
+## [3.0.2] - 2018-12-06
+
+### Fixed
+
+- Fixed compatibility with HTML that is not compliant to the CommonMark spec.
+
+
+
 ## [3.0.1] - 2018-12-04
 
 ### Fixed
