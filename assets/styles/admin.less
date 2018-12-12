@@ -19,5 +19,23 @@
       border: 1px solid #e0e0e0;
       border-top: none;
     }
+
+    // Make the toolbar sticky
+    .editor-toolbar {
+      position: -webkit-sticky; // Safari fallback
+      position: sticky; // other browsers
+      top: 32px; // become fixed/sticky when toolbar goes against the top of the viewport
+
+      // Make toolbar usable/visible when it becomes sticky
+      z-index: 100;
+      opacity: initial;
+      background-color: white;
+      border-bottom: 1px solid #bbb;
+    }
+
+    // Hovering would otherwise cause the text to become visible 'behind' the toolbar
+    .editor-toolbar:hover {
+      opacity: initial;
+    }
   }
 }
