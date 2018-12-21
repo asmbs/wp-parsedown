@@ -4,7 +4,7 @@
  * Plugin Name: WP Parsedown
  * Plugin URI:  https://github.com/asmbs/wp-parsedown
  * Description: Parsedown wrapper for WordPress with a live preview editor
- * Version:     3.0.4
+ * Version:     3.0.5
  * Author:      Kyle Tucker
  * Author URI:  https://github.com/friartuck6000
  *
