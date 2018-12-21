@@ -18,6 +18,14 @@ class ParsedownModified extends \ParsedownExtra
 
         # identify shortcode markers before before links
         array_unshift($this->InlineTypes['['], 'ShortcodeMarker');
+
+        /**
+         * Remove `a` from the list of text-level elements.
+         * An anchor tag should be able to span multiple lines, per CommonMark spec.
+         * @see https://spec.commonmark.org/0.27/#example-128
+         * This line won't be needed once Parsedown v1.8 is out of beta.
+         */
+        unset($this->textLevelElements[array_search('a', $this->textLevelElements)]);
     }
 
     #
