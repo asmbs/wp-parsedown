@@ -59,7 +59,7 @@ class ParsedownModified extends \ParsedownExtra
     {
         global $shortcode_tags;
         $shortcodeRegExSegment = implode('|', array_keys($shortcode_tags));
-        if (preg_match_all('/\[\/?(?:' . $shortcodeRegExSegment .')(?:[^][]++|(?R))*+\]/', $Line['text'], $matches))
+        if (preg_match_all('/\[\/?(?:' . $shortcodeRegExSegment .')(?:[^][]++|(?R))*+\](.*\[\/.*\])?/', $Line['text'], $matches))
         {
             $Block = array(
                 'markup' => implode('', $matches[0])
