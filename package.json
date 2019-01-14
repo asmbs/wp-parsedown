@@ -1,6 +1,6 @@
 {
     "name": "wp-parsedown",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "description": "Parsedown wrapper for WordPress with a live preview editor",
     "license": "MIT",
     "author": {
