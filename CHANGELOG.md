@@ -12,6 +12,14 @@ As of v3.0.0, this project adheres to [Semantic Versioning](https://semver.org/s
 
 
 
+## [3.0.6] - 2019-01-14
+
+### Fixed
+
+- Fixed handling of cases where an enclosing shortcode opened and closed on the same line (e.g. `[btn]Press Here[/btn]`).
+
+
+
 ## [3.0.5] - 2018-12-21
 
 ### Fixed
