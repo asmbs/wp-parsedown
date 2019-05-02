@@ -39,8 +39,8 @@ class ParsedownPlugin
         // Initialize parser
         $this->parser = $parser;
         $parser->setBreaksEnabled(self::BREAKS_ENABLED)
-            ->setMarkupEscaped(self::MARKUP_ESCAPED)
-            ->setUrlsLinked(self::URLS_LINKED);
+               ->setMarkupEscaped(self::MARKUP_ESCAPED)
+               ->setUrlsLinked(self::URLS_LINKED);
 
         // Set roots
         $this->rootPath = plugin_dir_path($rootDir);
@@ -62,8 +62,11 @@ class ParsedownPlugin
         // Disable the WYSIWYG editor globally
         add_filter('user_can_richedit', '__return_false', 100);
 
-        // Enqueue plugin scripts for editing view
+        // Enqueue plugin script for admin view
         add_action('admin_enqueue_scripts', [$this, 'enqueueAdminScripts']);
+
+        // Enqueue plugin script for public views
+        add_action('wp_enqueue_scripts', [$this, 'enqueuePublicScripts']);
 
         // Register the image shortcode and use it in place of HTML when inserting media
         // into a post
@@ -135,10 +138,15 @@ class ParsedownPlugin
     public function enqueueAdminScripts($hook)
     {
         if (in_array($hook, ['post.php', 'post-new.php'])) {
-            wp_enqueue_script('parsedown_js', $this->url('dist/scripts/main.bundle.js'), ['jquery'], null, true);
+            wp_enqueue_script('parsedown_js', $this->url('dist/scripts/admin.bundle.js'), ['jquery'], null, true);
 
-            wp_enqueue_style('parsedown_admin_css', $this->url('dist/styles/main.css'), [], false);
+            wp_enqueue_style('parsedown_admin_css', $this->url('dist/styles/admin.css'), [], false);
         }
+    }
+
+    public function enqueuePublicScripts($hook)
+    {
+        wp_enqueue_style( 'parsedown_admin_css', $this->url('dist/styles/main.css'), [], false);
     }
 
     /**
@@ -223,7 +231,7 @@ class ParsedownPlugin
          * @param   array     $attrs
          * @return  string[]
          */
-        $imgClasses = apply_filters('parsedown/image/img_classes', [], $attrs);
+        $imgClasses = apply_filters('parsedown/image/img_classes', ['wppd-image-shortcode'], $attrs);
 
         // Generate image tag
         $imgHtml = sprintf(

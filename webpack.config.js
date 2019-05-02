@@ -7,7 +7,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
     mode: 'production',
     entry: {
-        main: './assets/index.js'
+        admin: './assets/admin.js',
+        main: './assets/main.js'
     },
     output: {
         filename: 'scripts/[name].bundle.js',
