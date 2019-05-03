@@ -39,7 +39,7 @@ export class ReplaceEditor {
         let simplemdeOptions = {
             element: document.getElementById('simplemde-textarea'),
             spellChecker: false,
-            hideIcons: ["side-by-side", "fullscreen"],
+            hideIcons: ["image", "side-by-side", "fullscreen"],
             indentWithTabs: false
         };
         this.simplemde = new SimpleMDE(simplemdeOptions);

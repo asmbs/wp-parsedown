@@ -11910,7 +11910,7 @@ function () {
       var simplemdeOptions = {
         element: document.getElementById('simplemde-textarea'),
         spellChecker: false,
-        hideIcons: ["side-by-side", "fullscreen"],
+        hideIcons: ["image", "side-by-side", "fullscreen"],
         indentWithTabs: false
       };
       this.simplemde = new simplemde__WEBPACK_IMPORTED_MODULE_0___default.a(simplemdeOptions); // Initialize editor content
