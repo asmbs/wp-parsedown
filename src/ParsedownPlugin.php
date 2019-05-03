@@ -211,36 +211,62 @@ class ParsedownPlugin
             'caption' => false,
             'align'   => false,
             'size'    => 'large',
+            'responsive-opt-out' => false,
+            'max-width-opt-out' => false
         ], $attrs);
-
-        // Get image URL
-        if ($attrs['size'] == 'full') {
-            $src = wp_get_attachment_url($attrs['id']);
-        } else {
-            $size = in_array($attrs['size'], get_intermediate_image_sizes()) ? $attrs['size'] : 'medium';
-            $src = wp_get_attachment_image_src($attrs['id'], $size);
-            if ($src) {
-                $src = $src[0];
-            }
-        }
 
         /**
          * Allow filtering of image tag classes.
          *
-         * @param   string[]  $imgClasses
-         * @param   array     $attrs
+         * @param string[] $imgClasses
+         * @param array $attrs
+         *
          * @return  string[]
          */
-        $imgClasses = apply_filters('parsedown/image/img_classes', ['wppd-image-shortcode'], $attrs);
+        $imgClasses = [ 'wppd-image-shortcode' ];
+        if(!$attrs['max-width-opt-out']){
+            $imgClasses[] = 'wppd-image-shortcode-responsive';
+        }
+        $imgClasses = apply_filters( 'parsedown/image/img_classes', $imgClasses, $attrs );
 
-        // Generate image tag
-        $imgHtml = sprintf(
-            '<img class="%4$s" src="%2$s" alt="%3$s">',
-            $attrs['id'],
-            $src,
-            $attrs['alt'],
-            implode(' ', $imgClasses)
-        );
+        // If we should do a modern responsive image tag (i.e. the user didn't opt-out)
+        if(!$attrs['responsive-opt-out']){
+
+            $img_tag_src    = wp_get_attachment_url( $attrs['id'] );
+            $img_tag_srcset = wp_get_attachment_image_srcset( $attrs['id'] );
+            $img_tag_sizes = wp_get_attachment_image_sizes($attrs['id'], 'full');
+
+            $imgHtml = sprintf(
+                '<img src="%1$s" srcset="%2$s" sizes="%3$s" alt="%4$s" class="%5$s">',
+                esc_url( $img_tag_src ),
+                esc_attr( $img_tag_srcset ),
+                esc_attr( $img_tag_sizes ),
+                $attrs['alt'],
+                implode( ' ', $imgClasses )
+            );
+
+        } else {
+
+            // Get image URL
+            if ( $attrs['size'] == 'full' ) {
+                $src = wp_get_attachment_url( $attrs['id'] );
+            } else {
+                $size = in_array( $attrs['size'], get_intermediate_image_sizes() ) ? $attrs['size'] : 'medium';
+                $src  = wp_get_attachment_image_src( $attrs['id'], $size );
+                if ( $src ) {
+                    $src = $src[0];
+                }
+            }
+
+            // Generate image tag
+            $imgHtml = sprintf(
+                '<img class="%4$s" src="%2$s" alt="%3$s">',
+                $attrs['id'],
+                $src,
+                $attrs['alt'],
+                implode( ' ', $imgClasses )
+            );
+        }
 
         if ($attrs['href']) {
 
