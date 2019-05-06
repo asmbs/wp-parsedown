@@ -212,6 +212,7 @@ class ParsedownPlugin
             'alt'     => '',
             'caption' => false,
             'align'   => false,
+            'width'   => 'auto',
             'size'    => 'large',
             'responsive-opt-out' => false,
             'max-width-opt-out' => false
@@ -239,11 +240,12 @@ class ParsedownPlugin
             $img_tag_sizes = wp_get_attachment_image_sizes($attrs['id'], 'full');
 
             $imgHtml = sprintf(
-                '<img src="%1$s" srcset="%2$s" sizes="%3$s" alt="%4$s" class="%5$s">',
+                '<img src="%1$s" srcset="%2$s" sizes="%3$s" alt="%4$s" style="width:%5$s;" class="%6$s">',
                 esc_url( $img_tag_src ),
                 esc_attr( $img_tag_srcset ),
                 esc_attr( $img_tag_sizes ),
                 $attrs['alt'],
+                $attrs['width'],
                 implode( ' ', $imgClasses )
             );
 
