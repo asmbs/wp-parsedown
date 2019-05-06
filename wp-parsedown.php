@@ -5,10 +5,10 @@
  * Plugin URI:  https://github.com/asmbs/wp-parsedown
  * Description: Parsedown wrapper for WordPress with a live preview editor
  * Version:     3.0.6
- * Author:      Kyle Tucker
- * Author URI:  https://github.com/friartuck6000
+ * Author:      Kyle Tucker / ASMBS
+ * Author URI:  https://github.com/asmbs
  *
- * @author  Kyle Tucker <kyleatucker@gmail.com>
+ * @author Kyle Tucker <kyleatucker@gmail.com>
  */
 
 // A proper composer-installed WordPress instance will handle autoloading on its own, but just in case,

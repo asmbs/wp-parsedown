@@ -239,11 +239,21 @@ class ImageShortcode {
      */
     public function addImageIDField( $form_fields, $post ) {
 
-        $form_fields['wppd_image_id'] = [
-            'label' => __( 'Image ID' ),
-            'input'  => 'html',
-            'html' => '<span class="wppd-image-id">' . $post->ID . '</span>'
+        $mimeTypes = [
+            'image/jpeg',
+            'image/gif',
+            'image/png',
+            'image/webp',
+            'image/svg+xml'
         ];
+
+        if(in_array($post->post_mime_type, $mimeTypes)){
+            $form_fields['wppd_image_id'] = [
+                'label' => __( 'Image ID' ),
+                'input'  => 'html',
+                'html' => '<span class="wppd-image-id">' . $post->ID . '</span>'
+            ];
+        }
 
         return $form_fields;
     }
