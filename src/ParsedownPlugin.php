@@ -73,6 +73,9 @@ class ParsedownPlugin
         add_filter('image_send_to_editor', [$this, 'filterImageMarkup'], 100, 8);
         add_shortcode(self::IMG_SHORTCODE, [$this, 'parseImageShortcode']);
 
+        // Add an "Image ID" field to the "Attachment Details" modal and the "Edit Media" page
+        add_filter( 'attachment_fields_to_edit', [$this, 'addImageIDField'], null, 2 );
+
         return $this;
     }
 
@@ -139,9 +142,8 @@ class ParsedownPlugin
     {
         if (in_array($hook, ['post.php', 'post-new.php'])) {
             wp_enqueue_script('parsedown_js', $this->url('dist/scripts/admin.bundle.js'), ['jquery'], null, true);
-
-            wp_enqueue_style('parsedown_admin_css', $this->url('dist/styles/admin.css'), [], false);
         }
+        wp_enqueue_style('parsedown_admin_css', $this->url('dist/styles/admin.css'), [], false);
     }
 
     public function enqueuePublicScripts($hook)
@@ -336,6 +338,25 @@ class ParsedownPlugin
          * @return  string
          */
         return apply_filters('parsedown/image/output', $html, $attrs);
+    }
+
+    /**
+     * Adds an "Image ID" field to the "Attachment Details" modal and the "Edit Media" page.
+     *
+     * @param $form_fields
+     * @param $post
+     *
+     * @return mixed
+     */
+    public function addImageIDField( $form_fields, $post ) {
+
+        $form_fields['wppd_image_id'] = [
+            'label' => __( 'Image ID' ),
+            'input'  => 'html',
+            'html' => '<span class="wppd-image-id">' . $post->ID . '</span>'
+        ];
+
+        return $form_fields;
     }
 
     /**
