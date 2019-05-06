@@ -9,12 +9,17 @@ This plugin serves two purposes:
 
 This is a fork and a departure from the original [friartuck6000/wp-parsedown](https://github.com/friartuck6000/wp-parsedown).
 
+The goal is to allow your site editors to use simplified, clean, familiar formatting.
+
+An `[image]` shortcode is also included for optional use, as Markdown only allows for crude image insertion. See the `docs` folder for more information.
+
 
 
 ## Requirements
 
 - PHP 7.2+
 - Composer
+- "Classic Editor" plugin (if using WP v5+)
 
 
 

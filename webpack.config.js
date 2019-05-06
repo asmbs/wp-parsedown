@@ -7,7 +7,8 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 module.exports = {
     mode: 'production',
     entry: {
-        main: './assets/index.js'
+        admin: './assets/admin.js',
+        main: './assets/main.js'
     },
     output: {
         filename: 'scripts/[name].bundle.js',
@@ -19,7 +20,15 @@ module.exports = {
                 test: /\.m?js$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: 'babel-loader'
+                    loader: 'babel-loader',
+                    options: {
+                        presets: [
+                            ['@babel/preset-env', {
+                                'useBuiltIns': 'entry',
+                                corejs: 2
+                            }],
+                        ]
+                    }
                 }
             },
             {
