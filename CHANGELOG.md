@@ -12,6 +12,29 @@ As of v3.0.0, this project adheres to [Semantic Versioning](https://semver.org/s
 
 
 
+## [4.0.0] - 2019-05-06
+
+### Added
+
+- Styling, which is now used by default, to make images used with the shortcode more mobile-friendly.
+- Responsive image tag support, which is now used by default.
+- Warnings to post editing when a Markdown- or HTML-formatted image is detected.
+- An "Image ID" field for convenience when viewing images in the Media Library.
+- A Settings page to disable the shortcode, warnings, and the "Image ID" field.
+- `width`, `responsive-opt-out`, and `max-width-opt-out` attributes to the image shortcode.
+
+### Changed
+
+- The `size` attribute on the image shortcode to be ignored by default. (It only takes effect when `responsive-opt-out` is used now.)
+- Changed targeted browsers from >2% share to >1%.
+- Updated dependencies.
+
+### Removed
+
+- The image button from the SimpleMDE toolbar to discourage use of Markdown-formatted images.
+
+
+
 ## [3.0.6] - 2019-01-14
 
 ### Fixed
