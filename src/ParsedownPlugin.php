@@ -76,6 +76,9 @@ class ParsedownPlugin
         // Add an "Image ID" field to the "Attachment Details" modal and the "Edit Media" page
         add_filter( 'attachment_fields_to_edit', [$this, 'addImageIDField'], null, 2 );
 
+        // Ensure the user is using the [image] shortcode
+        add_action( 'admin_notices', [$this, 'validatePostContent'] );
+
         return $this;
     }
 
@@ -359,6 +362,23 @@ class ParsedownPlugin
         ];
 
         return $form_fields;
+    }
+
+    // Adds notices if the post is being edited with non-shortcode image insertions.
+    public function validatePostContent(){
+        global $current_screen, $post;
+        if ( $current_screen->parent_base == 'edit' ){
+            // If the post content has images inserted with Markdown
+            $matches = null;
+            if(preg_match('/(?:!\[(.*?)\]\((.*?)\))/', $post->post_content, $matches)){
+                echo '<div class="error"><p>Warning - Please use the [image] shortcode (not Markdown formatting) when inserting images.</p></div>';
+            }
+            // If the post content has images inserted with HTML
+            $matches = null;
+            if(preg_match('/&lt;img.*?&gt;/', $post->post_content, $matches)){
+                echo '<div class="error"><p>Warning - Please use the [image] shortcode (not the HTML img tag) when inserting images.</p></div>';
+            }
+        }
     }
 
     /**
