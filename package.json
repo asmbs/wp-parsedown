@@ -1,6 +1,6 @@
 {
     "name": "wp-parsedown",
-    "version": "3.0.6",
+    "version": "4.0.0",
     "description": "Parsedown wrapper for WordPress with a live preview editor",
     "license": "MIT",
     "author": {
@@ -11,7 +11,7 @@
         {
             "name": "Max McMahon",
             "email": "max@asmbs.org",
-            "url": "https://github.com/maxwellmc"
+            "url": "http://MaxwellMcMahon.com"
         }
     ],
     "repository": {
