@@ -1,4 +1,4 @@
-import './styles/admin.less';
+import './styles/admin.scss';
 import './scripts/replace-editor.js';
 
 // Import SimpleMDE's CSS

@@ -32,7 +32,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.less$/,
+                test: /\.s[ac]ss$/i,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -42,7 +42,7 @@ module.exports = {
                     },
                     'css-loader',
                     'postcss-loader',
-                    'less-loader'
+                    'sass-loader'
                 ]
             },
             {
