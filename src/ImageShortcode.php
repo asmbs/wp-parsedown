@@ -270,14 +270,14 @@ class ImageShortcode {
                 // If the post content has images inserted with Markdown
                 $matches = null;
                 if ( preg_match( '/(?:!\[(.*?)\]\((.*?)\))/', $post->post_content, $matches ) ) {
-                    echo '<div class="error"><p>Warning - Please use the [image] shortcode (not Markdown formatting) when inserting images.</p></div>';
+                    echo '<div class="error wppd-shortcode-warning"><p>Warning - Please use the [image] shortcode (not Markdown formatting) when inserting images.</p></div>';
                 }
             }
             if(SettingsPage::get_option('image_warn_html')) {
                 // If the post content has images inserted with HTML
                 $matches = null;
                 if ( preg_match( '/&lt;img.*?&gt;/', $post->post_content, $matches ) ) {
-                    echo '<div class="error"><p>Warning - Please use the [image] shortcode (not the HTML img tag) when inserting images.</p></div>';
+                    echo '<div class="error wppd-shortcode-warning"><p>Warning - Please use the [image] shortcode (not the HTML img tag) when inserting images.</p></div>';
                 }
             }
         }
