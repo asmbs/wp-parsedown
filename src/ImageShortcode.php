@@ -117,6 +117,7 @@ class ImageShortcode {
         if(!$attrs['max-width-opt-out']){
             $imgClasses[] = 'wppd-image-shortcode-responsive';
         }
+
         $imgClasses = apply_filters( 'parsedown/image/img_classes', $imgClasses, $attrs );
 
         // If we should do a modern responsive image tag (i.e. the user didn't opt-out)
@@ -195,12 +196,12 @@ class ImageShortcode {
         }
 
         // Set up figure element classes
-        $figureClasses = ['img', 'img-'. $attrs['id']];
+        $figureClasses = ['wppd-image-container'];
         if ($attrs['size']) {
-            $figureClasses[] = 'img-size-'. $attrs['size'];
+            $figureClasses[] = 'wppd-image-size-'. $attrs['size'];
         }
         if ($attrs['align'] && in_array($attrs['align'], ['left', 'center', 'right'])) {
-            $figureClasses[] = 'img-align-'. $attrs['align'];
+            $figureClasses[] = 'wppd-image-align-'. $attrs['align'];
         }
 
         /**
