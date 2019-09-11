@@ -3,6 +3,8 @@ const path = require('path');
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+const TerserPlugin = require('terser-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
     mode: 'production',
@@ -32,7 +34,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.less$/,
+                test: /\.s[ac]ss$/i,
                 use: [
                     {
                         loader: MiniCssExtractPlugin.loader,
@@ -42,7 +44,7 @@ module.exports = {
                     },
                     'css-loader',
                     'postcss-loader',
-                    'less-loader'
+                    'sass-loader'
                 ]
             },
             {
@@ -61,6 +63,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new CleanWebpackPlugin(),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery'
@@ -71,7 +74,9 @@ module.exports = {
         })
     ],
     optimization: {
+        minimize: true,
         minimizer: [
+            new TerserPlugin(),
             new OptimizeCSSAssetsPlugin({})
         ]
     },

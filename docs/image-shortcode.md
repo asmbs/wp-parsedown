@@ -1,6 +1,6 @@
 # Image Shortcode
 
-> This plugins provides an image shortcode to cover cases where image needs are not as basic as Markdown assumes, but also not so complicated to need full HTML.
+> This plugin provides an image shortcode to cover cases where image needs are not as basic as Markdown assumes, but also not so complicated to need full HTML.
 
 
 

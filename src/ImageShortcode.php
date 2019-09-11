@@ -117,6 +117,7 @@ class ImageShortcode {
         if(!$attrs['max-width-opt-out']){
             $imgClasses[] = 'wppd-image-shortcode-responsive';
         }
+
         $imgClasses = apply_filters( 'parsedown/image/img_classes', $imgClasses, $attrs );
 
         // If we should do a modern responsive image tag (i.e. the user didn't opt-out)
@@ -195,12 +196,12 @@ class ImageShortcode {
         }
 
         // Set up figure element classes
-        $figureClasses = ['img', 'img-'. $attrs['id']];
+        $figureClasses = ['wppd-image-container'];
         if ($attrs['size']) {
-            $figureClasses[] = 'img-size-'. $attrs['size'];
+            $figureClasses[] = 'wppd-image-size-'. $attrs['size'];
         }
         if ($attrs['align'] && in_array($attrs['align'], ['left', 'center', 'right'])) {
-            $figureClasses[] = 'img-align-'. $attrs['align'];
+            $figureClasses[] = 'wppd-image-align-'. $attrs['align'];
         }
 
         /**
@@ -269,14 +270,14 @@ class ImageShortcode {
                 // If the post content has images inserted with Markdown
                 $matches = null;
                 if ( preg_match( '/(?:!\[(.*?)\]\((.*?)\))/', $post->post_content, $matches ) ) {
-                    echo '<div class="error"><p>Warning - Please use the [image] shortcode (not Markdown formatting) when inserting images.</p></div>';
+                    echo '<div class="error wppd-shortcode-warning"><p>Warning - Please use the [image] shortcode (not Markdown formatting) when inserting images.</p></div>';
                 }
             }
             if(SettingsPage::get_option('image_warn_html')) {
                 // If the post content has images inserted with HTML
                 $matches = null;
                 if ( preg_match( '/&lt;img.*?&gt;/', $post->post_content, $matches ) ) {
-                    echo '<div class="error"><p>Warning - Please use the [image] shortcode (not the HTML img tag) when inserting images.</p></div>';
+                    echo '<div class="error wppd-shortcode-warning"><p>Warning - Please use the [image] shortcode (not the HTML img tag) when inserting images.</p></div>';
                 }
             }
         }

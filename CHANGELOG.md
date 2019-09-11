@@ -12,6 +12,25 @@ As of v3.0.0, this project adheres to [Semantic Versioning](https://semver.org/s
 
 
 
+## [4.1.0] - 2019-09-11
+
+### Added
+
+- TerserWebpackPlugin to shrink JS dist files to 42% of their former size.
+- CleanWebpackPlugin.
+
+### Changed
+
+- Switched from LESS to Sass.
+- The `<figure>` classes to have a prefix to help prevent conflicts.
+- Updated dependencies.
+
+### Fixed
+
+- The "align" attribute not actually working.
+
+
+
 ## [4.0.0] - 2019-05-06
 
 ### Added

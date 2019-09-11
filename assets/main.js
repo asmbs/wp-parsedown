@@ -1,2 +1,2 @@
 require("@babel/polyfill");
-import './styles/image.less';
+import './styles/image.scss';
